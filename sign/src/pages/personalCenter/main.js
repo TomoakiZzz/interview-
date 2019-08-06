@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import App from './index'
+import Person from './person'
 
-const app = new Vue(App)
+const app = new Vue(Person)
 app.$mount()
