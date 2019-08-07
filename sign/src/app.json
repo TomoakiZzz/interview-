@@ -1,14 +1,14 @@
 {
   "pages": [
-    "pages/personalCenter/main",
-    "pages/addInterview/main",
     "pages/clockIn/main",
     "pages/personal/main",
     "pages/notBegun/main",
     "pages/hasClock/main",
     "pages/coreDumped/main",
     "pages/all/main",
-    "pages/counter/main"
+    "pages/counter/main",
+    "pages/personalCenter/main",
+    "pages/addInterview/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
