@@ -28,7 +28,7 @@
 <script>
 // Use Vuex
 import { mapState, mapActions } from "vuex";
-
+// console.log(mapState,mapActions)
 export default {
   data() {
     return {
@@ -70,6 +70,10 @@ export default {
   height: 100%;
   background: skyblue;
 }
+.icon-error{
+   content: "\e647";
+   font-size:30px;
+} 
 .location {
   position: fixed;
   top: 30rpx;

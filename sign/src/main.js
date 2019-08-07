@@ -3,7 +3,7 @@ import App from './App'
 
 // 引入store
 import store from './store'
-
+import "../src/style/iconfont/iconfont.css"
 Vue.config.productionTip = false
 App.mpType = 'app'
 

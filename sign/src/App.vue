@@ -1,6 +1,7 @@
 <script>
-import {login} from '@/service/';
-
+import {login,interviewList} from '@/service/';
+import "../src/style/iconfont/iconfont.css"
+import { async } from 'q';
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -19,12 +20,14 @@ console.log('store',this.$store)
         if (res.code) {
           //发起网络请求
           let data = await login(res.code);
-          console.log('res...', data);
+          // console.log('res...', data);
         } else {
           console.log('登录失败！' + res.errMsg)
         }
       }
     })
+
+  
   }
 }
 </script>
