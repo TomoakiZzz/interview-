@@ -1,102 +1,90 @@
 <template>
-  <div class="clockIn">
-    <div class="map">
-     <map 
-      id="map" 
-      show-location 
-      ></map>
+  <div class="main">
+    <map id="map" show-location :markers="markers" :longitude="longitude" :latitude="latitude"></map>
+    <div class="location" @click="location">
+      <i class="iconfont icon-dingwei"></i>
     </div>
-    <div class="location">
-      <span><img src="../../imgs/people.png" alt="" class="img"></span>
-      <b><img src="../../imgs/location.png" 
-          alt="" 
-          class="img"
-          @click="clicklocation"
-      ></b>
+    <div class="goMy" @click="goMyView">
+      <i class="iconfont icon-04f"></i>
     </div>
-    <div class="bottom">
-      <button @click="addinterview">添加面试</button>
-    </div>
+    <cover-view class="personal">
+      <button></button>
+    </cover-view>
+    <div class="addInterview" @click="goAddInterview">添加面试</div>
   </div>
 </template>
 
 <script>
-// Use Vuex
-import store from './store'
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data(){
+  data() {
     return {
-
-    }
+      markers: []
+    };
   },
   computed: {
-    count () {
-      return store.state.count
-    }
+    ...mapState({
+      longitude: state => state.home.longitude,
+      latitude: state => state.home.latitude
+    })
   },
   methods: {
-    addinterview(e){//添加面试
-      console.log(e)
+    ...mapActions({
+      location: "home/getLocation"
+    }),
+    goMyView() {
+      wx.navigateTo({
+        url: "/pages/personal/main"
+      });
     },
-    regionchange: (e) => {
-      console.log(e)
-   },
-   clicklocation:(e)=>{
-     wx.navigateTo({
-       url: '/pages/personal/main',
-       success: (result)=>{
-         
-       },
-       fail: ()=>{},
-       complete: ()=>{}
-     });
-   }
+    goAddInterview() {
+      wx.navigateTo({ url: "/pages/addInterview/main" });
+    }
+  },
+  created() {
+    this.location();
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-.clockIn{
-  width:100%;
-  height:100%;
-  background: skyblue;
+map {
+  width: 100%;
+  height: 100%;
 }
-.map{
-  width:100%;
-  height:100%;
-}
-#map{
-  width:100%;
-  height:100%;
-}
-.location{
-  width:100%;
+.location {
   position: fixed;
-  top:80%;
-  display: flex;
-  span{
-    flex:8;
-    .img{
-      width:80rpx;
-      height:80rpx;
-      margin-left: 40rpx;
-    }
-  }
-  b{
-    .img{
-      width:80rpx;
-      height:80rpx;
-      margin-right: 40rpx;
-    }
+  bottom: 150rpx;
+  left: 30rpx;
+  > i {
+    font-size: 60rpx;
+    color: #197dbf;
   }
 }
-button{
-  width:100%;
-  background: #000;
-  color:#fff;
-  bottom:0;
+.goMy {
   position: fixed;
+  bottom: 150rpx;
+  right: 30rpx;
+  > i {
+    font-size: 60rpx;
+    color: #197dbf;
+  }
+}
+.main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .addInterview {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80rpx;
+    background: #000;
+    text-align: center;
+    line-height: 80rpx;
+    color: #fff;
+  }
 }
 </style>
-
