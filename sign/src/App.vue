@@ -42,5 +42,13 @@ page{
 }
 html,body,div,p,span,ul,ol,li{
   box-sizing: border-box;
+  width:100%;
+  height:100%;
+}
+/* this rule will be remove */
+
+body,html{
+  width:100%;
+  height:100%;
 }
 </style>
