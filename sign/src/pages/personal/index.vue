@@ -3,12 +3,13 @@
 
     <div class="peoTop">
       <div class="portrait">
-        <i class="iconfont icon-04f"></i>
+        <img :src="userInfo.avatarUrl" class="index_img" alt="">
       </div>
+      <p class="userName">{{userInfo.nickName}}</p>
     </div>
 
     <div class="perso">
-      <div @click="mypersonal" class="personal">
+      <div @click="getUserInfoClick" open-type="getUserInfo" @getuserinfo="getUserInfo" class="personal">
         <i class="iconfont icon-icon-clock"></i>
         <p>我的面试</p>
         <span>></span>
@@ -20,37 +21,58 @@
         <span>></span>
       </div>
     </div>
+
     
   </div>
 </template>
 
 <script>
-// Use Vuex
-import store from "./store";
-
+import { mapState, mapActions } from "vuex";
+// console.log(mapState,mapActions)
 export default {
+  data() {
+    return {
+      markers: [],
+      userInfo:{},
+      isShow:false
+    };
+  },
+  beforeMount(){
+this.handleGetUserInfo()
+  },
   computed: {
-    count() {
-      return store.state.count;
-    }
+    ...mapState({
+      longitude: state => state.clockIn.longitude,
+      latitude: state => state.clockIn.latitude
+    })
   },
   methods: {
-    increment() {
-      store.commit("increment");
-    },
-    decrement() {
-      store.commit("decrement");
-    },
-    mypersonal() {
-      wx.navigateTo({
-        url: "/pages/interviewList/main",
-        success: result => {},
-        fail: () => {},
-        complete: () => {}
-      });
-    }
-  }
-};
+    ...mapActions({
+      orientation: "clockIn/getLocation"
+    }),
+   handleGetUserInfo(){
+     wx.getUserInfo({
+       success:(data)=>{
+         console.log(data);
+         this.userInfo=data.userInfo
+         this.isShow=true
+       },
+       fail:()=>{
+         console.log("获取失败")
+       }
+     })
+   },
+   getUserInfo(data){
+     console.log(data);
+     //判断用户是否授权
+     if(data.mp.detail.rawData){
+       //用户授权
+       this.handleGetUserInfo()
+     }
+   }
+
+}
+}
 </script>
 
 <style lang="scss" scoped>
@@ -58,6 +80,7 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 .peoTop {
   width: 100%;
   height: 300rpx;
@@ -67,11 +90,20 @@ export default {
     height: 180rpx;
     // background: #ccc;
     margin-left: 45%;
-    .icon-04f {
+    .index_img {
+      width:150rpx;
+      height:150rpx;
+      border-radius: 50%;
       font-size: 120rpx;
       line-height: 250rpx;
+      margin-top: 30rpx;
     }
   }
+}
+.userName{
+  font-size: 40rpx;
+  margin-top: 30rpx;
+  margin-left: 48%;
 }
 .peo {
   width: 130rpx;

@@ -7,28 +7,40 @@
         </ul>
       </div>
       <div class="container">
-        <div v-if="tab===0">0</div>
-        <div v-else-if="tab===1">1</div>
-        <div v-else-if="tab===2">2</div>
+        <div>
+          <tabList :list="list"></tabList>
+        </div>
+        <!-- <div v-else-if="tab===1">
+          <coreDumped></coreDumped>
+        </div>
+        <div v-else-if="tab===2">
+          <notBegun></notBegun>
+        </div>
         <div v-else="tab===3">
           <div v-for="(ite,index) in list" :key="index" class="tabContent">
-            <b>{{ite.address}}</b>
-            <em>{{ite.company}}</em>
-            <span>{{ite.create_time}}</span>
-            <i>{{ite.id}}</i>
-            
+            <div class="all">
+                <b>{{ite.address}}</b>
+                <em>{{ite.company}}</em>
+                <span>{{ite.create_time}}</span>
+                <i>{{ite.id}}</i>
+            </div>
+           
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-// Use Vuex
+
 import { mapState, mapActions } from "vuex";
-// import all from "../all/main"
+import tabList from "../../components/tabList"
+
 export default {
+  components: {
+    tabList
+  },
   data() {
     return {
       tab: 3,
@@ -69,6 +81,9 @@ export default {
     border-bottom: 2rpx solid #ccc;
     line-height: 100rpx;
     display: flex;
+    position: fixed;
+    background: #fff;
+    top:0;
     ul {
       width: 100%;
       height: 100rpx;
@@ -86,8 +101,6 @@ export default {
       color: blue;
       border-bottom: 1px solid blue;
     }
-  }
-  .container {
   }
 }
 .tabContent{

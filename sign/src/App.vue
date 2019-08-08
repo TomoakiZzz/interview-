@@ -20,7 +20,7 @@ console.log('store',this.$store)
         if (res.code) {
           //发起网络请求
           let data = await login(res.code);
-          // console.log('res...', data);
+          console.log('res...', data);
         } else {
           console.log('登录失败！' + res.errMsg)
         }

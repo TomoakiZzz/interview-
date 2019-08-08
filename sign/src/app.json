@@ -1,13 +1,9 @@
 {
   "pages": [
-      
-
+    
     "pages/interviewList/main",
 
-    "pages/notBegun/main",
-    "pages/hasClock/main",
     "pages/coreDumped/main",
-    "pages/all/main",
     "pages/counter/main",
     "pages/personalCenter/main",
     "pages/addInterview/main",
