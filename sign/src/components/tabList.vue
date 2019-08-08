@@ -6,7 +6,7 @@
           <b class="firmName">{{item.company}}</b>
           <span :class="'tag'+(item.status+2)">{{item.status?item.status==1?'已放弃':'未开始':'已打卡'}}</span>
         </p>
-        <p class="tabsection">地址{{item.address.address}}</p>
+        <p class="tabsection">{{item.address.address}}</p>
         <p class="tabBottom">
           <span class="interViewTime">面试时间: {{item.start_time}}</span>
           <span :class="'tag'+(2-item.status)">{{item.remind?'未提醒':'已提醒'}}</span>
@@ -21,6 +21,7 @@
 
 
 export default {
+  
   data(){
     return{
       times:{}
@@ -31,16 +32,20 @@ export default {
       type: Array,
       default: []
     }
+    
   },
   component:{
     
+  },
+  onLoad(options){
+console.log("555555555555555555555",options)
   },
   methods: {
    details(id){
     wx.navigateTo({
        url: '/pages/detailInfo/main?id='+id,
        success: (res)=>{
-         console.log(res)
+         console.log("哈哈哈",res)
        },
        fail: ()=>{},
        complete: ()=>{}
@@ -85,7 +90,8 @@ li{
     line-height: 100rpx;
     display:flex;
     .interViewTime{
-        width:240%;
+        width:280%;
+        font-size: 25rpx;
     }
     span{
         :nth-child(2){
@@ -97,6 +103,8 @@ li{
     background: #ccc;
     padding:10rpx 2rpx;
     margin-left: 20%;
+    height: 70rpx;
+    line-height: 70rpx;
     color:rgb(70, 68, 68);
     text-align: center;
 }
@@ -108,5 +116,8 @@ li{
     margin-left: 20%;
     color:rgb(241, 43, 76);
     text-align: center;
+}
+.none{
+  margin-top: 30rpx;
 }
 </style>

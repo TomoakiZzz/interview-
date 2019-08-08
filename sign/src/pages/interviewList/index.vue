@@ -3,11 +3,12 @@
     <div class="test">
       <div class="testNav">
         <ul v-for="(item,index) in stateTab" :key="index">
-          <li :class="{'selected':tab === index,'testTitle':true}" @click="changTab(index)">{{item}}</li>
+          <li :class="{'selected':tab === index,'testTitle':true}" @click="changTab(index,item.status)">{{item.name}}</li>
         </ul>
       </div>
       <div class="container">
         <div>
+          <!-- <div v-for="(ite,index) in list" :key="index">4444{{ite.company}}</div> -->
           <tabList :list="list"></tabList>
         </div>
       </div>
@@ -26,29 +27,43 @@ export default {
   },
   data() {
     return {
-      tab: 3,
-      stateTab: ["未开始", "已打卡", "已放弃", "全部"]
+      tab: 0,
+      stateTab: [{
+              "name":"未开始",
+              "status":-1
+            },{
+            "name":"已打卡",
+            "status":0
+            },{
+            "name":"已放弃",
+            "status":1
+            },{
+            "name":"全部",
+            "status":2
+            }]
     };
   },
   computed: {
     ...mapState({
       list: state => state.interviewList.list
     })
+    
   },
 
   methods: {
     ...mapActions({
       interviewLists: "interviewList/getLocation"
     }),
-    changTab(index) {
+    changTab(index,status) {
       console.log(index);
       this.tab = index;
-     this.interviewLists();
+      // this.list.splice(0)
+     this.interviewLists({status:status});
     }
   },
-  created() {
-    this.interviewLists();
-  }
+  // created() {
+  //   this.interviewLists();
+  // }
 };
 </script>
 
@@ -57,13 +72,12 @@ export default {
 .test {
   width: 100%;
   .testNav {
-    padding: 0 20rpx;
     height: 100rpx;
     border-top: 2rpx solid #ccc;
     border-bottom: 2rpx solid #ccc;
     line-height: 100rpx;
-    display: flex;
     position: fixed;
+    display: flex;
     background: #fff;
     top:0;
     ul {
@@ -84,7 +98,9 @@ export default {
       border-bottom: 1px solid blue;
     }
   }
+  
 }
+
 .tabContent{
   width:100%;
   height:auto;
