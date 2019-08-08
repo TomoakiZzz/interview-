@@ -1,62 +1,75 @@
 <template>
   <div class="mainWarp">
-    <header class="header">面试信息</header>
-    <div class="interviewList">
-      <p class="listItem">
-        <span>公司名称</span>
-        <label>
-          <input placeholder="请输入公司名称">
-        </label>
-      </p>
-      <p class="listItem">
-        <span>公司电话</span>
-        <label>
-          <input maxlength="10" placeholder="请输入面试联系人电话">
-        </label>
-      </p>
-      <p class="listItem">
-        <span>面试时间</span>
-        <label class="timeSelect">
-          <picker
-            mode="multiSelector"
-            :value="multiIndex"
-            :range="getTime"
-            @change="bindMultiPickerChange"
-          >
-            <view class="picker">{{time}}</view>
-          </picker>
-          <i class="iconfont icon-warning"></i>
-        </label>
-      </p>
-      <p class="listItem">
-        <span>面试地址</span>
-        <label>
-          <input placeholder="请选择面试地址" disabled>
-        </label>
-      </p>
-    </div>
-    <h4 class="remarkTitle">备注信息</h4>
-    <div class="remarkContent">
-      <div>
-        <textarea></textarea>
+    <form @submit="formSubmit">
+      <header class="header">面试信息</header>
+      <div class="interviewList">
+        <p class="listItem">
+          <span>公司名称</span>
+          <label>
+            <input name="company" v-model="initial.company" placeholder="请输入公司名称">
+          </label>
+        </p>
+        <p class="listItem">
+          <span>公司电话</span>
+          <label>
+            <input name="phoneNumber" v-model="initial.phoneNumber" placeholder="请输入面试联系人电话" maxlength="11">
+          </label>
+        </p>
+        <p class="listItem">
+          <span>面试时间</span>
+          <label class="timeSelect">
+            <picker
+              mode="multiSelector"
+              name="time"
+              :value="multiIndex"
+              :range="getTime"
+              @change="bindMultiPickerChange"
+            >
+              <view class="picker">{{time}}</view>
+            </picker>
+            <i class="iconfont icon-warning" @click="remindMsg"></i>
+          </label>
+        </p>
+        <p class="listItem">
+          <span>面试地址</span>
+          <label>
+            <input
+              name="address"
+              placeholder="请选择面试地址"
+              disabled
+              @click="goAddressView"
+              v-model="initial.addressContext"
+            >
+          </label>
+        </p>
       </div>
-    </div>
-    <div class="sumbitBtn">确定</div>
+      <h4 class="remarkTitle">备注信息{{}}</h4>
+      <div class="remarkContent">
+        <div>
+          <textarea name="remark" v-model="initial.remark"></textarea>
+        </div>
+      </div>
+      <button form-type="submit" class="sumbitBtn">确定</button>
+    </form>
   </div>
 </template>
 
 <script>
 // Use Vuex
 // import store from "./store";
-
+import {mapState} from "vuex"
 export default {
   data() {
     return {
       multiIndex: [0, 0, 0],
-      time: ""
+      time: "",
+      address: ""
     };
   },
   computed: {
+    ...mapState({
+      initial: state=>state.addInterview.initial
+    }),
     getTime() {
       let multiArray = [[], [], []];
       let day = new Date().getDate();
@@ -84,12 +97,18 @@ export default {
       }
       multiArray[2].splice(0, 1);
       return multiArray;
+    },
+    highlight(){
+      if(!this.initial.company){
+        return false
+      }
+      
     }
   },
   methods: {
     bindMultiPickerChange(e) {
       console.log(789, e.mp.detail.value);
-      this.multiIndex = e.mp.detail.value
+      this.multiIndex = e.mp.detail.value;
       let indexArr = e.mp.detail.value;
       let showTime = [];
       let data = new Date();
@@ -98,7 +117,6 @@ export default {
       this.getTime.map((item, index) => {
         return showTime.push(item[indexArr[index]]);
       });
-
       this.time = `${year}-${
         month > 10 ? month : "0" + month
       }-${showTime[0].substr(showTime[0].length - 2, 1)} 
@@ -106,8 +124,26 @@ export default {
         showTime[2].length - 2,
         1
       ) + "0"}`;
-    }
+    },
+    goAddressView() {
+      wx.navigateTo({ url: "/pages/changeAddress/main" });
+    },
+    formSubmit(e) {
+      console.log("form发生了submit事件，携带数据为：", e.mp.detail.value);
+      
+    },
+    remindMsg() {
+      wx.showToast({
+        title: "在面试前一个小时我们会通知你哦",
+        icon:"none",
+        duration: 2000
+      });
+    },
+    watchInpValue(e){
+      console.log(e)
+    } 
   },
+  
   created() {
     let getCurrentTime = () => {
       let data = new Date();
@@ -150,15 +186,18 @@ export default {
       > span {
         width: 160rpx;
       }
-      .timeSelect{
+      .timeSelect {
         flex: 1;
         display: flex;
         justify-content: space-between;
-        i{
+        i {
           margin-right: 30rpx;
           font-size: 44rpx;
-          color:#197dbf;
+          color: #197dbf;
         }
+      }
+      input {
+        width: 100%;
       }
     }
   }
@@ -177,6 +216,10 @@ export default {
       height: 200rpx;
       border: 1px solid #c6c6c6;
       border-radius: 2px;
+      > textarea {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
   .sumbitBtn {
@@ -187,6 +230,7 @@ export default {
     background: #999999;
     color: #fff;
     font-size: 32rpx;
+    border-radius: 0;
   }
 }
 </style>

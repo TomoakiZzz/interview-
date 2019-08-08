@@ -8,6 +8,7 @@
     "pages/hasClock/main",
     "pages/coreDumped/main",
     "pages/all/main",
+    "pages/changeAddress/main",
     "pages/counter/main"
   ],
   "permission": {
