@@ -239,6 +239,7 @@ export default {
         this.initial.form_id = e.target.formId;
         let data = await this.addAddresslist(this.initial);
         console.log(data.code, "++++++");
+        let This = this;
         if (data.code === 0) {
           wx.showModal({
             title: "温馨提示",
@@ -248,14 +249,14 @@ export default {
             confirmColor: "#197DBF",
             success(res) {
               if (res.confirm) {
-                console.log()
-                // this.clearState({
-                //   form_id: "",
-                //   company: "",
-                //   address: "",
-                //   phone: ""
-                // });
-                // wx.navigateTo({ url: "/pages/interviewList/main" });
+                console.log(This.clearState);
+                This.clearState({
+                  form_id: "",
+                  company: "",
+                  address: "",
+                  phone: ""
+                });
+                wx.navigateTo({ url: "/pages/interviewList/main" });
               }
             }
           });
