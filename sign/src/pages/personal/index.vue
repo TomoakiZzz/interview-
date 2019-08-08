@@ -1,67 +1,148 @@
 <template>
   <div class="personal-warp">
-    <div class="peoTop"><img src="../../imgs/people.png" class="peo"/></div>
-    <div>
-      <p><img src="../../imgs/shijian.png" class="peop"/>我的面试<span>></span></p>
-      <p><img src="../../imgs/kefu.png" class="peop"/>客服中心<span>></span></p>
+    <div class="peoTop">
+      <div class="portrait">
+        <img :src="userInfo.avatarUrl" class="index_img" alt />
+      </div>
+      <p class="userName">{{userInfo.nickName}}</p>
+    </div>
+
+    <div class="perso">
+      <div
+        @click="getUserInfoClick"
+        open-type="getUserInfo"
+        @getuserinfo="getUserInfo"
+        class="personal"
+      >
+        <i class="iconfont icon-icon-clock"></i>
+        <p>我的面试</p>
+        <span>></span>
+      </div>
+
+      <div class="personal">
+        <i class="iconfont icon-warning"></i>
+        <p>客服中心</p>
+        <span>></span>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// Use Vuex
-import store from './store'
-
+import { mapState, mapActions } from "vuex";
+// console.log(mapState,mapActions)
 export default {
+  data() {
+    return {
+      markers: [],
+      userInfo: {},
+      isShow: false
+    };
+  },
+  beforeMount() {
+    this.handleGetUserInfo();
+  },
   computed: {
-    count () {
-      return store.state.count
-    }
+    ...mapState({
+      longitude: state => state.clockIn.longitude,
+      latitude: state => state.clockIn.latitude
+    })
   },
   methods: {
-    increment () {
-      store.commit('increment')
+    ...mapActions({
+      orientation: "clockIn/getLocation"
+    }),
+    handleGetUserInfo() {
+      wx.getUserInfo({
+        success: data => {
+          console.log(data);
+          this.userInfo = data.userInfo;
+          this.isShow = true;
+        },
+        fail: () => {
+          console.log("获取失败");
+        }
+      });
     },
-    decrement () {
-      store.commit('decrement')
+    getUserInfoClick() {
+      wx.navigateTo({
+        url: "/pages/interviewList/main",
+        success: result => {},
+        fail: () => {},
+        complete: () => {}
+      });
+    },
+    getUserInfo(data) {
+      console.log(data);
+      //判断用户是否授权
+      if (data.mp.detail.rawData) {
+        //用户授权
+        this.handleGetUserInfo();
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-.personal-warp{
-  width:100%;
-  height:100%;
-}
-.peoTop{
+.personal-warp {
   width: 100%;
-  height:300rpx;
-  background:rgb(222, 236, 241);
+  height: 100%;
 }
-.peo{
+
+.peoTop {
+  width: 100%;
+  height: 300rpx;
+  background: rgb(246, 249, 250);
+  .portrait {
+    width: 100rpx;
+    height: 180rpx;
+    // background: #ccc;
+    margin-left: 45%;
+    .index_img {
+      width: 150rpx;
+      height: 150rpx;
+      border-radius: 50%;
+      font-size: 120rpx;
+      line-height: 250rpx;
+      margin-top: 30rpx;
+    }
+  }
+}
+.userName {
+  font-size: 40rpx;
+  margin-top: 30rpx;
+  margin-left: 48%;
+}
+.peo {
   width: 130rpx;
-  height:130rpx;
-  margin-top:10%;
+  height: 130rpx;
   margin-left: 40%;
 }
-.peop{
-  width: 50rpx;
-  height:50rpx;
-  line-height: 50rpx;
-  margin-top: 10rpx;
-}
-p{
-  width:100%;
-  line-height: 40rpx;
-  margin-top: 10%;
-  border:2rpx solid #ccc;
-  height:80rpx;
-  span{
-    float: right;
-    line-height: 80rpx;
+
+.personal {
+  width: 100%;
+  line-height: 100rpx;
+  height: 100rpx;
+  margin-top: 40rpx;
+  border-bottom: 2rpx solid #ccc;
+  border-top: 2rpx solid #ccc;
+  display: flex;
+  .icon-icon-clock {
+    flex: 1;
     font-size: 40rpx;
-    margin-right: 20rpx;
+    margin-left: 20rpx;
+  }
+  .icon-warning {
+    flex: 1;
+    font-size: 50rpx;
+    margin-left: 20rpx;
+  }
+  p {
+    flex: 8;
+  }
+  span {
+    flex: 1;
   }
 }
 </style>

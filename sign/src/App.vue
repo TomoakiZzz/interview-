@@ -1,7 +1,8 @@
 
 <script>
-import {login} from '@/service/';
-
+import {login,interviewList} from '@/service/';
+import "../src/style/iconfont/iconfont.css"
+import { async } from 'q';
 export default {
   created () {
     // 调用API从本地缓存中获取数据
@@ -13,7 +14,7 @@ export default {
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
 
-
+console.log('store',this.$store)
     // 调用登陆接口
     wx.login({
       success: async (res)=>{
@@ -26,6 +27,8 @@ export default {
         }
       }
     })
+
+  
   }
 }
 </script>
