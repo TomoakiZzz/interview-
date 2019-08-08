@@ -10,23 +10,6 @@
         <div>
           <tabList :list="list"></tabList>
         </div>
-        <!-- <div v-else-if="tab===1">
-          <coreDumped></coreDumped>
-        </div>
-        <div v-else-if="tab===2">
-          <notBegun></notBegun>
-        </div>
-        <div v-else="tab===3">
-          <div v-for="(ite,index) in list" :key="index" class="tabContent">
-            <div class="all">
-                <b>{{ite.address}}</b>
-                <em>{{ite.company}}</em>
-                <span>{{ite.create_time}}</span>
-                <i>{{ite.id}}</i>
-            </div>
-           
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -55,17 +38,16 @@ export default {
 
   methods: {
     ...mapActions({
-      location: "interviewList/getLocation"
+      interviewLists: "interviewList/getLocation"
     }),
     changTab(index) {
       console.log(index);
       this.tab = index;
-      if (index == 3) {
-      }
+     this.interviewLists();
     }
   },
   created() {
-    this.location();
+    this.interviewLists();
   }
 };
 </script>

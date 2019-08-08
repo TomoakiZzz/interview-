@@ -7,7 +7,6 @@ const state = {
   // 模块内的同步改变
   const mutations = {
     updateLocation(state, payload){
-      console.log(state,payload)
       state.list = payload;
     }
   }
@@ -15,7 +14,6 @@ const state = {
   // 模块内的异步改变
   const actions = {
     async  getLocation({commit},payload){
-      console.log(payload)
       const res=await sign(payload);
       console.log("resssss",res.data);
       commit("updateLocation",res.data);

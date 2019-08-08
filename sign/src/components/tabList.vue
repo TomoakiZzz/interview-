@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
    <ul v-if="list.length">
-      <li v-for="item in list" :key="item.id" @click="goDetail(item.id)">
+      <li v-for="item in list" :key="item.id" @click="details(item.id)">
         <p class="tabTop">
           <b class="firmName">{{item.company}}</b>
           <span :class="'tag'+(item.status+2)">{{item.status?item.status==1?'已放弃':'未开始':'已打卡'}}</span>
@@ -21,14 +21,31 @@
 
 
 export default {
+  data(){
+    return{
+      times:{}
+    }
+  },
   props: {
     list: {
       type: Array,
       default: []
     }
   },
+  component:{
+    
+  },
   methods: {
-   
+   details(id){
+    wx.navigateTo({
+       url: '/pages/detailInfo/main?id='+id,
+       success: (res)=>{
+         console.log(res)
+       },
+       fail: ()=>{},
+       complete: ()=>{}
+     });
+   }
   }
 }
 </script>
@@ -42,7 +59,7 @@ li{
   // margin-top: 20rpx;
   width: 100%;
   height:auto;
-  background:skyblue;
+  background:rgb(250, 249, 249);
   padding: 10rpx 30rpx;
   box-sizing: border-box;
 }
@@ -67,10 +84,8 @@ li{
     height:100rpx;
     line-height: 100rpx;
     display:flex;
-    background: red;
     .interViewTime{
         width:240%;
-        background: orange;
     }
     span{
         :nth-child(2){
@@ -79,6 +94,19 @@ li{
     }
 }
 .tag3{
-    color:red;
+    background: #ccc;
+    padding:10rpx 2rpx;
+    margin-left: 20%;
+    color:rgb(70, 68, 68);
+    text-align: center;
+}
+.tag1{
+   background: pink;
+   height:60%;
+   line-height: 60rpx;
+   margin-top: 20rpx;
+    margin-left: 20%;
+    color:rgb(241, 43, 76);
+    text-align: center;
 }
 </style>

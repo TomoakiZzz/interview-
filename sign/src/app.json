@@ -1,14 +1,16 @@
 {
   "pages": [
-    
+   
     "pages/interviewList/main",
 
     "pages/coreDumped/main",
     "pages/counter/main",
     "pages/personalCenter/main",
     "pages/addInterview/main",
+    "pages/detailInfo/main",
 
     "pages/clockIn/main",
+    
     "pages/personal/main"
  
   ],
