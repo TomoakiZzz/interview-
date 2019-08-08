@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/clockIn/main",
+    "pages/personalCenter/main",
+    "pages/addInterview/main",
+    "pages/personal/main",
+    "pages/notBegun/main",
+    "pages/hasClock/main",
+    "pages/coreDumped/main",
+    "pages/all/main",
+    "pages/changeAddress/main",
+    "pages/counter/main"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "一面而就",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "backgroundColor": "#fafafa",
+    "selectedColor": "#333",
+    "borderStyle": "white",
+    "list": [
+      {
+        "text": "未开始",
+        "pagePath": "pages/notBegun/main"
+      },
+      {
+        "text": "已打卡",
+        "pagePath": "pages/hasClock/main"
+      },
+      {
+        "text": "已放弃",
+        "pagePath": "pages/coreDumped/main"
+      },
+      {
+        "text": "全部",
+        "pagePath": "pages/all/main"
+      }
+    ],
+    "position": "top"
+  }
+}
