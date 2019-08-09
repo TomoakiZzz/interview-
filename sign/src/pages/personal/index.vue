@@ -16,6 +16,8 @@
         open-type="openSetting"
         class="getPhone"
       >打开设置页面</button>
+
+      <p class="marginBottom"> </p>
     </div>
 
     <div class="perso">
@@ -122,11 +124,14 @@ export default {
   width: 100%;
   height: 100%;
 }
-
+.marginBottom{
+  height:40rpx;
+}
 .peoTop {
   width: 100%;
   height: auto;
   background: rgb(246, 249, 250);
+
   .portrait {
     width: 100rpx;
     height: 180rpx;
@@ -147,6 +152,7 @@ export default {
   font-size: 30rpx;
   width: 40%;
   border: 2rpx solid #ccc;
+  
 }
 .userName {
   font-size: 40rpx;

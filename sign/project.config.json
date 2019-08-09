@@ -1,7 +1,10 @@
 {
-	"description": "项目配置文件。",
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": true,
 		"minified": true,
@@ -17,12 +20,16 @@
 			"outputPath": ""
 		}
 	},
-	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wxd6ede29905a911d5",
+	"libVersion": "2.8.0",
+	"appid": "wx3375420e2c184d34",
 	"projectname": "sign",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
+	"miniprogramRoot": "dist/wx/",
+	"cloudfunctionTemplateRoot": "",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -37,45 +44,23 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-<<<<<<< HEAD
-			"current": 3,
-=======
 			"current": 1,
->>>>>>> 2dffd7673716d78a643ea321a33dfb26560318de
 			"list": [
 				{
-					"id": 0,
-					"name": "pages/addInterview/main",
-					"pathName": "pages/addInterview/main",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
-					"name": "pages/addInterview/main",
-					"pathName": "pages/interviewList/main",
-					"query": "",
-					"scene": null
-<<<<<<< HEAD
-				},
-				{
-					"id": -1,
-					"name": "首页",
+					"name": "pages/personal/main",
 					"pathName": "pages/personal/main",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "地图",
+					"name": "pages/clockIn/main",
 					"pathName": "pages/clockIn/main",
 					"scene": null
-=======
->>>>>>> 2dffd7673716d78a643ea321a33dfb26560318de
 				}
 			]
 		}
