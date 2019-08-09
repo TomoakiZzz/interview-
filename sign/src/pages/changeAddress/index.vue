@@ -12,7 +12,7 @@
         class="addressItem"
         v-for="item in address"
         :key="item.id"
-        @click="goAddInterview(item.address)"
+        @click="goAddInterview(item)"
       >
         <div class="addressIcon">
           <span></span>
@@ -32,7 +32,7 @@ import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   computed: {
     ...mapState({
-      address: state => state.addInterview.address,
+      address: state => state.addInterview.addressList,
     })
   },
   data() {
