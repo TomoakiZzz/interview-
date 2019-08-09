@@ -22,7 +22,6 @@ const state = {
         }else{
           item.address = JSON.parse(item.address).address
         }
-        
         item.start_time = new Date(Number(item.start_time)).toLocaleString();
       })
       commit("updateLocation",res.data);

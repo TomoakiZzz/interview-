@@ -41,7 +41,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 5,
 			"list": [
 				{
 					"id": 0,
@@ -68,6 +68,20 @@
 					"id": -1,
 					"name": "地图",
 					"pathName": "pages/addInterview/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/clockIn/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人",
+					"pathName": "pages/personal/main",
 					"query": "",
 					"scene": null
 				}
