@@ -2,16 +2,14 @@
   <div class="list-warp">
     <div class="test">
       <div class="testNav">
-        <ul v-for="(item,index) in stateTab" :key="index">
-          <li
-            :class="{'selected':tab === index,'testTitle':true}"
-            @click="changTab(index,item.status)"
-          >{{item.name}}</li>
+        <ul>
+          <li v-for="(item,index) in stateTab" :key="index" @click="changTab(index,item.status)">
+            <span :class="{'selected':tab === index}">{{item.name}}</span>
+          </li>
         </ul>
       </div>
       <div class="container">
         <div>
-          <!-- <div v-for="(ite,index) in list" :key="index">4444{{ite.company}}</div> -->
           <tabList :list="list"></tabList>
         </div>
       </div>
@@ -45,7 +43,7 @@ export default {
         },
         {
           name: "全部",
-          status: 2
+          status: "2"
         }
       ]
     };
@@ -61,15 +59,18 @@ export default {
       interviewLists: "interviewList/getLocation"
     }),
     changTab(index, status) {
-      console.log(index);
       this.tab = index;
-      // this.list.splice(0)
-      this.interviewLists({ status: status });
+      if(typeof status === "number"){
+        this.interviewLists({ status: status });
+      }else{
+        this.interviewLists();
+      }
+      
     }
+  },
+  created() {
+    this.interviewLists({ status: -1 });
   }
-  // created() {
-  //   this.interviewLists();
-  // }
 };
 </script>
 
@@ -79,39 +80,41 @@ export default {
   width: 100%;
   .testNav {
     width: 100%;
-    height: 100rpx;
+    height: 88rpx;
     border-top: 2rpx solid #ccc;
-    border-bottom: 2rpx solid #ccc;
-    line-height: 100rpx;
     position: fixed;
-    display: flex;
     background: #fff;
     top: 0;
     ul {
       width: 100%;
-      height: 100rpx;
+      height: 88rpx;
       display: flex;
-      text-align: center;
+      font-size: 30rpx;
       li {
-        flex: 2;
+        flex: 1;
+        line-height: 86rpx;
+        text-align: center;
+      }
+      li>span{
+        display:inline-block;
+        width: auto;
+        height: 100%;
       }
     }
-    .testTitle {
-      flex: 1;
-      text-align: center;
-    }
     .selected {
-      color: blue;
-      border-bottom: 1px solid blue;
+      color: #368dc7;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: #368dc7;
+      }
     }
   }
-}
-
-.tabContent {
-  width: 100%;
-  height: auto;
-  background: skyblue;
-  margin-top: 4rpx;
 }
 </style>
 
