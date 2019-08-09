@@ -58,7 +58,7 @@ map {
   bottom: 150rpx;
   left: 30rpx;
   > i {
-    font-size: 60rpx;
+    font-size: 80rpx;
     color: #197dbf;
   }
 }
@@ -67,7 +67,7 @@ map {
   bottom: 150rpx;
   right: 30rpx;
   > i {
-    font-size: 60rpx;
+    font-size: 80rpx;
     color: #197dbf;
   }
 }
@@ -80,10 +80,10 @@ map {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80rpx;
+    height: 90rpx;
     background: #000;
     text-align: center;
-    line-height: 80rpx;
+    line-height: 90rpx;
     color: #fff;
   }
 }

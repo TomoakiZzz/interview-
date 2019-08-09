@@ -2,22 +2,15 @@
   <div class="personal-warp">
     <div class="peoTop">
       <div class="portrait">
-        <img :src="userInfo.avatarUrl" class="index_img" alt />
+        <img v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" class="index_img" alt>
+        <i v-else class="iconfont icon-04f person"></i>
       </div>
       <p class="userName">{{userInfo.nickName}}</p>
-      <button
-        open-type="getPhoneNumber"
-        @getphonenumber="getPhoneNumber"
-        class="getPhone"
-      >获取用户手机号</button>
+      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" class="getPhone">获取用户手机号</button>
 
-      <button
-        v-if="showSetting"
-        open-type="openSetting"
-        class="getPhone"
-      >打开设置页面</button>
+      <button v-if="showSetting" open-type="openSetting" class="getPhone">打开设置页面</button>
 
-      <p class="marginBottom"> </p>
+      <p class="marginBottom"></p>
     </div>
 
     <div class="perso">
@@ -50,7 +43,7 @@ export default {
       markers: [],
       userInfo: {},
       isShow: false,
-      showSetting:false
+      showSetting: false
     };
   },
   beforeMount() {
@@ -65,21 +58,20 @@ export default {
   methods: {
     ...mapActions({
       orientation: "clockIn/getLocation",
-      decrypt:"user/decrypt"
+      decrypt: "user/decrypt"
     }),
     getPhoneNumber(e) {
-      console.log("e....",e);
-      let {encryptedData,iv}=e.target;
-      if(encryptedData){
+      console.log("e....", e);
+      let { encryptedData, iv } = e.target;
+      if (encryptedData) {
         this.decrypt({
           encryptedData,
           iv
-      })
-      }else{
-        this.showSetting=true;
-        wx.openSetting({success:res=>{}})
+        });
+      } else {
+        this.showSetting = true;
+        wx.openSetting({ success: res => {} });
       }
-      
     },
     serviceClick() {
       wx.showModal({
@@ -124,18 +116,18 @@ export default {
   width: 100%;
   height: 100%;
 }
-.marginBottom{
-  height:40rpx;
+.marginBottom {
+  height: 40rpx;
 }
 .peoTop {
   width: 100%;
   height: auto;
   background: rgb(246, 249, 250);
-
   .portrait {
     width: 100rpx;
     height: 180rpx;
     // background: #ccc;
+    position: relative;
     margin-left: 45%;
     .index_img {
       width: 150rpx;
@@ -145,6 +137,12 @@ export default {
       line-height: 250rpx;
       margin-top: 30rpx;
     }
+    .person {
+      font-size: 150rpx;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+    }
   }
 }
 .getPhone {
@@ -152,7 +150,6 @@ export default {
   font-size: 30rpx;
   width: 40%;
   border: 2rpx solid #ccc;
-  
 }
 .userName {
   font-size: 40rpx;
