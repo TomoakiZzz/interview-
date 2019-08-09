@@ -14,7 +14,6 @@ const state = {
         description: ""
     }
 }
-
 const actions = {
     getSuggestion({ commit }, payload) {
         console.log(payload)

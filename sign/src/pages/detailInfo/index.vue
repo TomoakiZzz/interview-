@@ -62,9 +62,9 @@ export default {
     changeRemind(e, options) {
       console.log(e, options);
       if (e.target.value) {
-        this.changeDetail({ context: { remind: 1 }, id: this.addressId * 1 });
-      } else {
         this.changeDetail({ context: { remind: -1 }, id: this.addressId * 1 });
+      } else {
+        this.changeDetail({ context: { remind: 1 }, id: this.addressId * 1 });
       }
     },
     punchCard() {},

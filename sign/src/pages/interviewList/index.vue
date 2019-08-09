@@ -50,13 +50,13 @@ export default {
   },
   computed: {
     ...mapState({
-      list: state => state.interviewList.list
+      list: state => state.detailInfo.list
     })
   },
 
   methods: {
     ...mapActions({
-      interviewLists: "interviewList/getLocation"
+      interviewLists: "detailInfo/getLocation"
     }),
     changTab(index, status) {
       this.tab = index;
@@ -70,10 +70,7 @@ export default {
   },
   onLoad() {
     this.interviewLists({ status: -1 });
-  },
-  mounted() {
-    this.interviewLists({ status: -1 });
-  },
+  }
 };
 </script>
 
