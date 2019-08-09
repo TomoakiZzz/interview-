@@ -1,7 +1,10 @@
 {
-	"description": "项目配置文件。",
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": true,
 		"minified": true,
@@ -17,12 +20,16 @@
 			"outputPath": ""
 		}
 	},
-	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wxd6ede29905a911d5",
+	"libVersion": "2.8.0",
+	"appid": "wx3375420e2c184d34",
 	"projectname": "sign",
-	"simulatorType": "wechat",
-	"simulatorPluginLibVersion": {},
+	"miniprogramRoot": "dist/wx/",
+	"cloudfunctionTemplateRoot": "",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -37,24 +44,22 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": 5,
 			"list": [
 				{
-					"id": 0,
-					"name": "pages/addInterview/main",
-					"pathName": "pages/addInterview/main",
+					"id": -1,
+					"name": "pages/personal/main",
+					"pathName": "pages/personal/main",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/addInterview/main",
-					"pathName": "pages/interviewList/main",
-					"query": "",
+					"name": "pages/clockIn/main",
+					"pathName": "pages/clockIn/main",
 					"scene": null
 				},
 				{

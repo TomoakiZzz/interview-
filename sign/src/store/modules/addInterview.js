@@ -33,7 +33,7 @@ const actions = {
         payload.latitude = payload.address.location.lat;
         payload.longitude = payload.address.location.lng;
 
-        payload.address = JSON.stringify(payload.address);
+        payload.address = JSON.stringify(payload.address)
         console.log(payload,"////////////////")
         let result = await addAddress(payload);
         console.log(result)

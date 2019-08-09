@@ -8,7 +8,8 @@ import addInterview from "./modules/addInterview"
 import clockIn from './modules/clockIn';
 import interviewList from './modules/interviewList';
 import detailInfo from "./modules/detailInfo";
-import updatedata from "./modules/detailInfo"
+import updatedata from "./modules/detailInfo";
+import user from "./modules/user"
 Vue.use(Vuex);
 
 
@@ -19,7 +20,8 @@ export default new Vuex.Store({
     clockIn,
     interviewList,
     detailInfo,
-    updatedata
+    updatedata,
+    user
   },
   plugins: [CreateLogger()]
 })

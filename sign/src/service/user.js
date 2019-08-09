@@ -24,3 +24,10 @@ export let update = params=>{
   console.log(params)
   return fly.get('/sign/1', params);
 }
+
+
+//解密数据
+export let decrypt = params=>{
+  console.log(params)
+  return fly.post('/user/decrypt', params);
+}
