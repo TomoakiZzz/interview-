@@ -68,9 +68,12 @@ export default {
       
     }
   },
-  created() {
+  onLoad() {
     this.interviewLists({ status: -1 });
-  }
+  },
+  mounted() {
+    this.interviewLists({ status: -1 });
+  },
 };
 </script>
 

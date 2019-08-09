@@ -47,7 +47,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 6,
 			"list": [
 				{
 					"id": -1,
@@ -60,6 +60,7 @@
 					"id": -1,
 					"name": "pages/clockIn/main",
 					"pathName": "pages/clockIn/main",
+					"query": "",
 					"scene": null
 				},
 				{
@@ -87,6 +88,13 @@
 					"id": -1,
 					"name": "个人",
 					"pathName": "pages/personal/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "详情",
+					"pathName": "pages/detailInfo/main",
 					"query": "",
 					"scene": null
 				}

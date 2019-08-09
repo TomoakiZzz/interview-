@@ -14,20 +14,19 @@ export let sign = params=>{
 
 //获取面试详情
 export let detailInfo = params=>{
-  console.log(params)
-  return fly.get('/sign/7', params);
+  return fly.get(`/sign/${params}`);
 }
 
-
-//更新面试信息接口
-export let update = params=>{
-  console.log(params)
-  return fly.get('/sign/1', params);
-}
 
 
 //解密数据
 export let decrypt = params=>{
-  console.log(params)
+
   return fly.post('/user/decrypt', params);
+}
+
+//更新面试信息
+export let updateDetail = params=>{
+  console.log(params,"15484655484848")
+  return fly.put(`/sign/${params.id}`,params.context)
 }
