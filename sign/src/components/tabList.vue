@@ -31,9 +31,6 @@ export default {
     }
   },
   component: {},
-  //   onLoad(options){
-  // console.log("555555555555555555555",options)
-  //   },
   methods: {
     details(id) {
       wx.navigateTo({
@@ -90,13 +87,13 @@ li {
   .interViewTime {
     font-size: 25rpx;
   }
-  span:nth-child(2){ 
-      padding: 0 10rpx;
-      width: 116rx;
-      height: 60rpx;
-      line-height: 60rpx;
-      text-align: center;
-      font-size: 25rpx;
+  span:nth-child(2) {
+    padding: 0 10rpx;
+    width: 116rx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    font-size: 25rpx;
   }
 }
 .tag1 {
@@ -105,7 +102,7 @@ li {
 }
 .tag3 {
   color: rgb(241, 43, 76);
-  background: #FEF0F0;
+  background: #fef0f0;
 }
 .none {
   margin-top: 30rpx;
