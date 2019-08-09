@@ -89,17 +89,19 @@ li{
     height:100rpx;
     line-height: 100rpx;
     display:flex;
+    justify-content: space-between;
     .interViewTime{
-        width:280%;
+    
         font-size: 25rpx;
     }
     span{
         :nth-child(2){
             text-align: center;
+            
         }
     }
 }
-.tag3{
+.tag1{
     background: #ccc;
     padding:10rpx 2rpx;
     margin-left: 20%;
@@ -108,11 +110,11 @@ li{
     color:rgb(70, 68, 68);
     text-align: center;
 }
-.tag1{
-   background: pink;
-   height:60%;
-   line-height: 60rpx;
-   margin-top: 20rpx;
+.tag3{
+    background: pink;
+    height:60%;
+    line-height: 60rpx;
+    margin-top: 20rpx;
     margin-left: 20%;
     color:rgb(241, 43, 76);
     text-align: center;

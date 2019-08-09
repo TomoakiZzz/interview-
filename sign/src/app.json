@@ -1,28 +1,26 @@
 {
   "pages": [
-   
-    "pages/interviewList/main",
-
-    "pages/coreDumped/main",
-    "pages/counter/main",
+    "pages/clockIn/main",
     "pages/personalCenter/main",
     "pages/addInterview/main",
-    "pages/detailInfo/main",
-
-    "pages/clockIn/main",
-    
-    "pages/personal/main"
- 
+    "pages/personal/main",
+    "pages/hasClock/main",
+    "pages/coreDumped/main",
+    "pages/changeAddress/main",
+    "pages/counter/main",
+    "pages/interviewList/main",
+    "pages/detailInfo/main"
   ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle": "black"
-  },
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "一面而就",
+    "navigationBarTextStyle": "black"
   }
+  
 }

@@ -3,7 +3,10 @@
     <div class="test">
       <div class="testNav">
         <ul v-for="(item,index) in stateTab" :key="index">
-          <li :class="{'selected':tab === index,'testTitle':true}" @click="changTab(index,item.status)">{{item.name}}</li>
+          <li
+            :class="{'selected':tab === index,'testTitle':true}"
+            @click="changTab(index,item.status)"
+          >{{item.name}}</li>
         </ul>
       </div>
       <div class="container">
@@ -17,9 +20,8 @@
 </template>
 
 <script>
-
 import { mapState, mapActions } from "vuex";
-import tabList from "../../components/tabList"
+import tabList from "../../components/tabList";
 
 export default {
   components: {
@@ -28,39 +30,43 @@ export default {
   data() {
     return {
       tab: 0,
-      stateTab: [{
-              "name":"未开始",
-              "status":-1
-            },{
-            "name":"已打卡",
-            "status":0
-            },{
-            "name":"已放弃",
-            "status":1
-            },{
-            "name":"全部",
-            "status":2
-            }]
+      stateTab: [
+        {
+          name: "未开始",
+          status: -1
+        },
+        {
+          name: "已打卡",
+          status: 0
+        },
+        {
+          name: "已放弃",
+          status: 1
+        },
+        {
+          name: "全部",
+          status: 2
+        }
+      ]
     };
   },
   computed: {
     ...mapState({
       list: state => state.interviewList.list
     })
-    
   },
 
   methods: {
     ...mapActions({
       interviewLists: "interviewList/getLocation"
     }),
-    changTab(index,status) {
+    changTab(index, status) {
       console.log(index);
       this.tab = index;
       // this.list.splice(0)
-     this.interviewLists({status:status});
+      this.interviewLists({ status: status });
     }
-  },
+  }
   // created() {
   //   this.interviewLists();
   // }
@@ -72,6 +78,7 @@ export default {
 .test {
   width: 100%;
   .testNav {
+    width: 100%;
     height: 100rpx;
     border-top: 2rpx solid #ccc;
     border-bottom: 2rpx solid #ccc;
@@ -79,7 +86,7 @@ export default {
     position: fixed;
     display: flex;
     background: #fff;
-    top:0;
+    top: 0;
     ul {
       width: 100%;
       height: 100rpx;
@@ -98,12 +105,11 @@ export default {
       border-bottom: 1px solid blue;
     }
   }
-  
 }
 
-.tabContent{
-  width:100%;
-  height:auto;
+.tabContent {
+  width: 100%;
+  height: auto;
   background: skyblue;
   margin-top: 4rpx;
 }

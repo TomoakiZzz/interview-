@@ -1,34 +1,22 @@
 <template>
-  <div class="clockIn">
-    <div class="map">
-      <map id="map" 
-      :markers="markers" 
-      :longitude="longitude" 
-      :latitude="latitude" 
-      show-location
-      ></map>
-      <cover-view class="location" @click="orientation">
-        <button>定位</button>
-      </cover-view>
+  <div class="main">
+    <map id="map" show-location :markers="markers" :longitude="longitude" :latitude="latitude"></map>
+    <div class="location" @click="location">
+      <i class="iconfont icon-dingwei"></i>
     </div>
-    <div class="locations">
-      <span>
-        <img src="../../imgs/people.png" alt class="img" />
-      </span>
-      <b>
-        <img src="../../imgs/location.png" alt class="img" @click="clicklocation" />
-      </b>
+    <div class="goMy" @click="goMyView">
+      <i class="iconfont icon-04f"></i>
     </div>
-    <div class="bottom">
-      <button @click="addinterview" class="addinterview">添加面试</button>
-    </div>
+    <cover-view class="personal">
+      <button></button>
+    </cover-view>
+    <div class="addInterview" @click="goAddInterview">添加面试</div>
   </div>
 </template>
 
 <script>
-// Use Vuex
 import { mapState, mapActions } from "vuex";
-// console.log(mapState,mapActions)
+
 export default {
   data() {
     return {
@@ -37,83 +25,66 @@ export default {
   },
   computed: {
     ...mapState({
-      longitude: state => state.clockIn.longitude,
-      latitude: state => state.clockIn.latitude
+      longitude: state => state.home.longitude,
+      latitude: state => state.home.latitude
     })
   },
   methods: {
     ...mapActions({
-      orientation: "clockIn/getLocation"
+      location: "home/getLocation"
     }),
-    addinterview(e) {
-      //添加面试
-      console.log(e);
-    },
-    regionchange: e => {
-      console.log(e);
-    },
-    clicklocation: e => {
+    goMyView() {
       wx.navigateTo({
-        url: "/pages/personal/main",
-        success: result => {},
-        fail: () => {},
-        complete: () => {}
+        url: "/pages/personal/main"
       });
+    },
+    goAddInterview() {
+      wx.navigateTo({ url: "/pages/addInterview/main" });
     }
+  },
+  created() {
+    this.location();
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.clockIn {
+map {
   width: 100%;
   height: 100%;
-  background: skyblue;
 }
-.icon-error{
-   content: "\e647";
-   font-size:30px;
-} 
 .location {
   position: fixed;
-  top: 30rpx;
+  bottom: 150rpx;
   left: 30rpx;
-}
-.map {
-  width: 100%;
-  height: 100%;
-}
-#map {
-  width: 100%;
-  height: 100%;
-}
-.locations {
-  width: 100%;
-  position: fixed;
-  top: 80%;
-  display: flex;
-  span {
-    flex: 8;
-    .img {
-      width: 80rpx;
-      height: 80rpx;
-      margin-left: 40rpx;
-    }
-  }
-  b {
-    .img {
-      width: 80rpx;
-      height: 80rpx;
-      margin-right: 40rpx;
-    }
+  > i {
+    font-size: 60rpx;
+    color: #197dbf;
   }
 }
-.addinterview {
-  width: 100%;
-  background: #000;
-  color: #fff;
-  bottom: 0;
+.goMy {
   position: fixed;
+  bottom: 150rpx;
+  right: 30rpx;
+  > i {
+    font-size: 60rpx;
+    color: #197dbf;
+  }
+}
+.main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  .addInterview {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80rpx;
+    background: #000;
+    text-align: center;
+    line-height: 80rpx;
+    color: #fff;
+  }
 }
 </style>
-

@@ -1,8 +1,15 @@
+
 <script>
 import {login,interviewList} from '@/service/';
 import "../src/style/iconfont/iconfont.css"
+import {mapMutations} from "vuex"
 import { async } from 'q';
 export default {
+  methods:{
+    ...mapMutations({
+      updataOpenid:"user/updataOpenid"
+    })
+  },
   created () {
     // 调用API从本地缓存中获取数据
     /*
@@ -13,14 +20,15 @@ export default {
      * 支付宝(蚂蚁)：mpvue === my, mpvuePlatform === 'my'
      */
 
-console.log('store',this.$store)
+console.log('store....',this.$store)
     // 调用登陆接口
     wx.login({
       success: async (res)=>{
         if (res.code) {
           //发起网络请求
           let data = await login(res.code);
-          console.log('res...', data);
+          console.log('res..a.', data);
+          this.updataOpenid(data.data.openid)
         } else {
           console.log('登录失败！' + res.errMsg)
         }
@@ -33,6 +41,7 @@ console.log('store',this.$store)
 </script>
 
 <style>
+@import "./style/iconfont/iconfont.css";
 page{
   width: 100%;
   height: 100%;
@@ -45,8 +54,7 @@ page{
 }
 html,body,div,p,span,ul,ol,li{
   box-sizing: border-box;
-  width:100%;
-  height:100%;
+ 
 }
 /* this rule will be remove */
 

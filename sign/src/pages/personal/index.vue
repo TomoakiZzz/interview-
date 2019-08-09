@@ -5,6 +5,17 @@
         <img :src="userInfo.avatarUrl" class="index_img" alt />
       </div>
       <p class="userName">{{userInfo.nickName}}</p>
+      <button
+        open-type="getPhoneNumber"
+        @getphonenumber="getPhoneNumber"
+        class="getPhone"
+      >获取用户手机号</button>
+
+      <button
+        v-if="showSetting"
+        open-type="openSetting"
+        class="getPhone"
+      >打开设置页面</button>
     </div>
 
     <div class="perso">
@@ -19,7 +30,7 @@
         <span>></span>
       </div>
 
-      <div class="personal">
+      <div class="personal" @click="serviceClick">
         <i class="iconfont icon-warning"></i>
         <p>客服中心</p>
         <span>></span>
@@ -36,7 +47,8 @@ export default {
     return {
       markers: [],
       userInfo: {},
-      isShow: false
+      isShow: false,
+      showSetting:false
     };
   },
   beforeMount() {
@@ -50,8 +62,29 @@ export default {
   },
   methods: {
     ...mapActions({
-      orientation: "clockIn/getLocation"
+      orientation: "clockIn/getLocation",
+      decrypt:"user/decrypt"
     }),
+    getPhoneNumber(e) {
+      console.log("e....",e);
+      let {encryptedData,iv}=e.target;
+      if(encryptedData){
+        this.decrypt({
+          encryptedData,
+          iv
+      })
+      }else{
+        this.showSetting=true;
+        wx.openSetting({success:res=>{}})
+      }
+      
+    },
+    serviceClick() {
+      wx.showModal({
+        title: "微信开发者工具不支持客服中心",
+        showCancel: false
+      });
+    },
     handleGetUserInfo() {
       wx.getUserInfo({
         success: data => {
@@ -92,7 +125,7 @@ export default {
 
 .peoTop {
   width: 100%;
-  height: 300rpx;
+  height: auto;
   background: rgb(246, 249, 250);
   .portrait {
     width: 100rpx;
@@ -108,6 +141,12 @@ export default {
       margin-top: 30rpx;
     }
   }
+}
+.getPhone {
+  margin-top: 40rpx;
+  font-size: 30rpx;
+  width: 40%;
+  border: 2rpx solid #ccc;
 }
 .userName {
   font-size: 40rpx;
