@@ -4,7 +4,11 @@ const moment = require('moment')
 const state = {
   lists: {},
   addressId: 0,
-  list: []
+  list: [],
+  status: 0,//表示面试类型
+  page: 1,//当前页码
+  pageSize: 10,//当前显示的数据
+  hasMore: true//是否有更多数据
 }
 // 模块内的同步改变
 const mutations = {
@@ -18,31 +22,50 @@ const mutations = {
     state.addressId = payload
   },
   updateLocation(state, payload) {
-    state.list = payload;
+    if (payload.list) {
+      if (payload.list.length === state.pageSize * state.page) {
+        state.hasMore = true
+      } else {
+        state.hasMore = false
+      }
+    }
+    for (let key in payload) {
+      state[key] = payload[key]
+    }
+
   }
 }
 // 模块内的异步改变
 const actions = {
-  async  getDeatail({ commit }, payload) {
-    
+  async  getDeatail({ commit, state }, payload) {
+
     const res = await detailInfo(payload);
     console.log("ress", res.data);
     commit("updateDeatail", res.data);
   },
   async changeDetail({ commit, dispatch }, payload) {
-    console.log(payload,"888888888888")
+    console.log(payload, "888888888888")
     let data = await updateDetail(payload)
     // console.log(data)
     if (data.code === 0) {
       console.log('失败')
       await dispatch('getDeatail', payload.id)
-      await dispatch('getLocation',{ status: -1 ,remind:payload.context.remind})
+      await dispatch('getLocation', { status: -1, remind: payload.context.remind, page: state.page, pageSize: 10 })
 
     }
   },
-  async  getLocation({ commit }, payload) {
-    const res = await sign(payload);
-    // console.log("每部分数据", res.data);
+  async  getLocation({ commit, state }, payload) {
+    let params = {}
+    params.page = state.page
+    params.pageSize = state.pageSize
+    params.status = state.status
+    if (params.atatus === 2) {
+      delete params.status
+    }
+
+
+    const res = await sign(params);
+    console.log("每部分数据", res.data);
     res.data.map(item => {
       if (!JSON.parse(item.address).address) {
         item.address = item.address
@@ -51,7 +74,12 @@ const actions = {
       }
       item.start_time = new Date(Number(item.start_time)).toLocaleString();
     })
-    commit("updateLocation", res.data);
+    if (state.page === 1) {
+      commit("updateLocation", { list: res.data });
+    } else {
+      commit("updateLocation", { list: [...state.list, ...res.data] });
+    }
+
   }
 }
 export default {
