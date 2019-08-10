@@ -6,8 +6,7 @@
         <i v-else class="iconfont icon-04f person"></i>
       </div>
       <p v-if="personPhoneNumber" class="userName">{{personPhoneNumber}}</p>
-      <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" class="getPhone">获取用户手机号</button>
-
+      <button v-if="isShowMask" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" class="getUserPhoneNumber">获取用户手机号</button>
       <button v-if="showSetting" open-type="openSetting" class="getPhone">打开设置页面</button>
 
       <p class="marginBottom"></p>
@@ -35,7 +34,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions ,mapMutations} from "vuex";
 // console.log(mapState,mapActions)
 export default {
   data() {
@@ -51,7 +50,8 @@ export default {
   },
   computed: {
     ...mapState({
-      personPhoneNumber:state=>state.user.personPhoneNumber
+      personPhoneNumber:state=>state.user.personPhoneNumber,
+      isShowMask:state=>state.user.isShowMask
     })
   },
   methods: {
@@ -59,7 +59,11 @@ export default {
       orientation: "clockIn/getLocation",
       decrypt: "user/decrypt"
     }),
+    ...mapMutations({
+      changeIsShow:"user/changeIsShow"
+    }),
     getPhoneNumber(e) {
+      this.changeIsShow(false)
       console.log("e....", e);
       let { encryptedData, iv } = e.target;
       if (encryptedData) {
@@ -150,6 +154,7 @@ export default {
   width: 40%;
   border: 2rpx solid #ccc;
 }
+
 .userName {
   font-size: 40rpx;
   margin-top: 30rpx;
@@ -186,6 +191,15 @@ export default {
   span {
     flex: 1;
   }
+}
+.getUserPhoneNumber{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  // background: red;
+  opacity: 0;
 }
 </style>
 
