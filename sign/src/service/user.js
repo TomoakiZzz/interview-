@@ -30,3 +30,7 @@ export let updateDetail = params=>{
   console.log(params,"15484655484848")
   return fly.put(`/sign/${params.id}`,params.context)
 }
+
+export let updatePhoneNumber = params=>{
+  return fly.post("/user/updatePhone",params)
+}

@@ -5,7 +5,7 @@
         <img v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" class="index_img" alt>
         <i v-else class="iconfont icon-04f person"></i>
       </div>
-      <p class="userName">{{userInfo.nickName}}</p>
+      <p v-if="personPhoneNumber" class="userName">{{personPhoneNumber}}</p>
       <button open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" class="getPhone">获取用户手机号</button>
 
       <button v-if="showSetting" open-type="openSetting" class="getPhone">打开设置页面</button>
@@ -51,8 +51,7 @@ export default {
   },
   computed: {
     ...mapState({
-      longitude: state => state.clockIn.longitude,
-      latitude: state => state.clockIn.latitude
+      personPhoneNumber:state=>state.user.personPhoneNumber
     })
   },
   methods: {
@@ -154,7 +153,8 @@ export default {
 .userName {
   font-size: 40rpx;
   margin-top: 30rpx;
-  margin-left: 48%;
+  width: 100%;
+  text-align: center;
 }
 .peo {
   width: 130rpx;
