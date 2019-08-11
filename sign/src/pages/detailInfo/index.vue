@@ -67,7 +67,15 @@ export default {
         this.changeDetail({ context: { remind: 1 }, id: this.addressId * 1 });
       }
     },
-    punchCard() {},
+    punchCard() {
+      wx.wx.navigateTo({
+        url: '/pages/punchCard/main',
+        success: (result)=>{
+        },
+        fail: ()=>{},
+        complete: ()=>{}
+      });
+    },
     abandon() {
       wx.showModal({
         title: "温馨提示",

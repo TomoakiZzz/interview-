@@ -22,7 +22,7 @@ const mutations = {
     state.addressId = payload
   },
   updateLocation(state, payload) {
-    console.log(payload.list,"上拉加载")
+    // console.log(payload.list,"上拉加载")
     if (payload.list) {
       if (payload.list.length === state.pageSize * state.page) {
         state.hasMore = true
@@ -49,7 +49,7 @@ const actions = {
     let data = await updateDetail(payload)
     // console.log(data)
     if (data.code === 0) {
-      console.log('失败')
+      // console.log('失败')
       await dispatch('getDeatail', payload.id)
       await dispatch('getLocation', { status: -1, remind: payload.context.remind, page: state.page, pageSize: 10 })
 
@@ -60,11 +60,9 @@ const actions = {
     params.page = state.page
     params.pageSize = state.pageSize
     params.status = state.status
-    if (params.atatus === 2) {
+    if (params.status === 2) {
       delete params.status
     }
-
-
     const res = await sign(params);
     console.log("每部分数据", res.data);
     res.data.map(item => {

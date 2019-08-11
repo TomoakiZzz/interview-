@@ -48,7 +48,7 @@ export default {
         },
         {
           name: "全部",
-          status: 1
+          status: 2
         }
       ]
     };
