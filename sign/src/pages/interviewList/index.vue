@@ -11,6 +11,7 @@
       <div class="container">
         <div>
           <tabList :list="list"></tabList>
+          <div v-if="list.length && !hasMore" class="hintMsg">没有更多数据了...</div>
         </div>
       </div>
     </div>
@@ -18,8 +19,9 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import tabList from "../../components/tabList";
+import { async, timeout } from "q";
 
 export default {
   components: {
@@ -43,33 +45,51 @@ export default {
         },
         {
           name: "全部",
-          status: "2"
+          status: 1
         }
       ]
     };
   },
   computed: {
     ...mapState({
-      list: state => state.detailInfo.list
+      list: state => state.detailInfo.list,
+      page: state => state.detailInfo.page,
+      pageSize: state => state.detailInfo.pageSize,
+      hasMore: state => state.detailInfo.hasMore
     })
   },
-
+  onReachBottom() {
+    if (this.hasMore) {
+      wx.showLoading({
+        title: "玩命加载中", //上拉的时候会出现一个提示框
+        success: async () => {
+          await this.updateLocation({ page: this.page + 1 });
+          await this.interviewLists();
+          wx.hideLoading();
+        }
+      });
+    }
+  },
+  // onPullDownRefresh() {},
   methods: {
     ...mapActions({
       interviewLists: "detailInfo/getLocation"
     }),
+    ...mapMutations({
+      updateLocation: "detailInfo/updateLocation"
+    }),
     changTab(index, status) {
       this.tab = index;
-      if(typeof status === "number"){
-        this.interviewLists({ status: status });
-      }else{
-        this.interviewLists();
-      }
-      
+      this.updateLocation({ status, page: 1 });
+      this.interviewLists();
     }
   },
   onLoad() {
-    this.interviewLists({ status: -1 });
+    this.interviewLists({
+      status: -1,
+      page: this.page,
+      pageSize: this.pageSize
+    });
   }
 };
 </script>
@@ -95,8 +115,8 @@ export default {
         line-height: 86rpx;
         text-align: center;
       }
-      li>span{
-        display:inline-block;
+      li > span {
+        display: inline-block;
         width: auto;
         height: 100%;
       }
@@ -115,6 +135,13 @@ export default {
       }
     }
   }
+}
+.hintMsg {
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background: #eee;
 }
 </style>
 

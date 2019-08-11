@@ -30,3 +30,12 @@ export let updateDetail = params=>{
   console.log(params,"15484655484848")
   return fly.put(`/sign/${params.id}`,params.context)
 }
+//更新手机号
+export let updatePhoneNumber = params=>{
+  return fly.post("/user/updatePhone",params)
+}
+
+//生物验证，指纹解锁
+export let getUseFingerprint = params=>{
+  return fly.post('/user/fingerPrint',params)
+}

@@ -2,22 +2,14 @@
   <div class="personal-warp">
     <div class="peoTop">
       <div class="portrait">
-        <img :src="userInfo.avatarUrl" class="index_img" alt />
+        <img v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" class="index_img" alt>
+        <i v-else class="iconfont icon-04f person"></i>
       </div>
-      <p class="userName">{{userInfo.nickName}}</p>
-      <button
-        open-type="getPhoneNumber"
-        @getphonenumber="getPhoneNumber"
-        class="getPhone"
-      >获取用户手机号</button>
+      <p v-if="personPhoneNumber" class="userName">{{personPhoneNumber}}</p>
+      <button v-if="isShowMask" open-type="getPhoneNumber" @getphonenumber="getPhoneNumber" class="getUserPhoneNumber">获取用户手机号</button>
+      <button v-if="showSetting" open-type="openSetting" class="getPhone">打开设置页面</button>
 
-      <button
-        v-if="showSetting"
-        open-type="openSetting"
-        class="getPhone"
-      >打开设置页面</button>
-
-      <p class="marginBottom"> </p>
+      <p class="marginBottom"></p>
     </div>
 
     <div class="perso">
@@ -42,7 +34,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions ,mapMutations} from "vuex";
 // console.log(mapState,mapActions)
 export default {
   data() {
@@ -50,7 +42,7 @@ export default {
       markers: [],
       userInfo: {},
       isShow: false,
-      showSetting:false
+      showSetting: false
     };
   },
   beforeMount() {
@@ -58,28 +50,31 @@ export default {
   },
   computed: {
     ...mapState({
-      longitude: state => state.clockIn.longitude,
-      latitude: state => state.clockIn.latitude
+      personPhoneNumber:state=>state.user.personPhoneNumber,
+      isShowMask:state=>state.user.isShowMask
     })
   },
   methods: {
     ...mapActions({
       orientation: "clockIn/getLocation",
-      decrypt:"user/decrypt"
+      decrypt: "user/decrypt"
+    }),
+    ...mapMutations({
+      changeIsShow:"user/changeIsShow"
     }),
     getPhoneNumber(e) {
-      console.log("e....",e);
-      let {encryptedData,iv}=e.target;
-      if(encryptedData){
+      this.changeIsShow(false)
+      console.log("e....", e);
+      let { encryptedData, iv } = e.target;
+      if (encryptedData) {
         this.decrypt({
           encryptedData,
           iv
-      })
-      }else{
-        this.showSetting=true;
-        wx.openSetting({success:res=>{}})
+        });
+      } else {
+        this.showSetting = true;
+        wx.openSetting({ success: res => {} });
       }
-      
     },
     serviceClick() {
       wx.showModal({
@@ -124,18 +119,18 @@ export default {
   width: 100%;
   height: 100%;
 }
-.marginBottom{
-  height:40rpx;
+.marginBottom {
+  height: 40rpx;
 }
 .peoTop {
   width: 100%;
   height: auto;
   background: rgb(246, 249, 250);
-
   .portrait {
     width: 100rpx;
     height: 180rpx;
     // background: #ccc;
+    position: relative;
     margin-left: 45%;
     .index_img {
       width: 150rpx;
@@ -145,6 +140,12 @@ export default {
       line-height: 250rpx;
       margin-top: 30rpx;
     }
+    .person {
+      font-size: 150rpx;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+    }
   }
 }
 .getPhone {
@@ -152,12 +153,13 @@ export default {
   font-size: 30rpx;
   width: 40%;
   border: 2rpx solid #ccc;
-  
 }
+
 .userName {
   font-size: 40rpx;
   margin-top: 30rpx;
-  margin-left: 48%;
+  width: 100%;
+  text-align: center;
 }
 .peo {
   width: 130rpx;
@@ -189,6 +191,15 @@ export default {
   span {
     flex: 1;
   }
+}
+.getUserPhoneNumber{
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  // background: red;
+  opacity: 0;
 }
 </style>
 
