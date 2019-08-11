@@ -60,8 +60,6 @@
 </template>
 
 <script>
-// Use Vuex
-// import store from "./store";
 import { mapState, mapActions, mapMutations } from "vuex";
 const moment = require("moment");
 const range = [
