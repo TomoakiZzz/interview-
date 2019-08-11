@@ -68,7 +68,7 @@ export default {
       }
     },
     punchCard() {
-      wx.wx.navigateTo({
+      wx.navigateTo({
         url: '/pages/punchCard/main',
         success: (result)=>{
         },

@@ -7,7 +7,7 @@
     <cover-view class="personal">
       <button></button>
     </cover-view>
-    <div class="addInterview" >打卡</div>
+    <div class="addInterview">打卡</div>
   </div>
 </template>
 
@@ -34,8 +34,7 @@ export default {
       wx.navigateTo({
         url: "/pages/personal/main"
       });
-    },
-    
+    }
   },
   created() {
     this.location();

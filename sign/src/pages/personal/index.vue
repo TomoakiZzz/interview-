@@ -13,7 +13,7 @@
     </div>
 
     <div class="perso">
-      <div
+      <button
         @click="getUserInfoClick"
         open-type="getUserInfo"
         @getuserinfo="getUserInfo"
@@ -22,13 +22,13 @@
         <i class="iconfont icon-icon-clock"></i>
         <p>我的面试</p>
         <span>></span>
-      </div>
+      </button>
 
-      <div class="personal" @click="serviceClick">
+      <button class="personal" open-type="contact">
         <i class="iconfont icon-warning"></i>
         <p>客服中心</p>
         <span>></span>
-      </div>
+      </button>
     </div>
   </div>
 </template>
@@ -76,12 +76,6 @@ export default {
         wx.openSetting({ success: res => {} });
       }
     },
-    serviceClick() {
-      wx.showModal({
-        title: "微信开发者工具不支持客服中心",
-        showCancel: false
-      });
-    },
     handleGetUserInfo() {
       wx.getUserInfo({
         success: data => {
@@ -127,11 +121,12 @@ export default {
   height: auto;
   background: rgb(246, 249, 250);
   .portrait {
-    width: 100rpx;
+    width: 100%;
     height: 180rpx;
     // background: #ccc;
     position: relative;
-    margin-left: 45%;
+    display: flex;
+    justify-content: center;
     .index_img {
       width: 150rpx;
       height: 150rpx;
@@ -175,6 +170,9 @@ export default {
   border-bottom: 2rpx solid #ccc;
   border-top: 2rpx solid #ccc;
   display: flex;
+  border-radius: 0;
+  background: #fff;
+  padding: 0;
   .icon-icon-clock {
     flex: 1;
     font-size: 40rpx;
@@ -187,6 +185,8 @@ export default {
   }
   p {
     flex: 8;
+    text-align: left;
+    font-size: 40rpx;
   }
   span {
     flex: 1;
@@ -198,8 +198,10 @@ export default {
   left:0;
   width: 100%;
   height: 100%;
-  // background: red;
-  opacity: 0;
+  opacity: 0; 
+}
+.person>p,.personal>p{
+  font-size: 30rpx;
 }
 </style>
 

@@ -5,7 +5,7 @@ const state = {
   lists: {},
   addressId: 0,
   list: [],
-  status: 0,//表示面试类型
+  status: -1,//表示面试类型
   page: 1,//当前页码
   pageSize: 10,//当前显示的数据
   hasMore: true//是否有更多数据
@@ -45,7 +45,7 @@ const actions = {
     commit("updateDeatail", res.data);
   },
   async changeDetail({ commit, dispatch }, payload) {
-    console.log(payload, "888888888888")
+    // console.log(payload, "888888888888")
     let data = await updateDetail(payload)
     // console.log(data)
     if (data.code === 0) {
@@ -63,6 +63,7 @@ const actions = {
     if (params.status === 2) {
       delete params.status
     }
+    console.log(params,"传过来的参数")
     const res = await sign(params);
     console.log("每部分数据", res.data);
     res.data.map(item => {
