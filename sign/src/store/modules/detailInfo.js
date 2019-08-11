@@ -22,6 +22,10 @@ const mutations = {
     state.addressId = payload
   },
   updateLocation(state, payload) {
+<<<<<<< HEAD
+=======
+    console.log(payload.list,"上拉加载")
+>>>>>>> 6c1a8c48c645e1a824ea7abb4d65a86e41e526ba
     if (payload.list) {
       if (payload.list.length === state.pageSize * state.page) {
         state.hasMore = true

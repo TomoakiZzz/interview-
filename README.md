@@ -20,7 +20,6 @@
   <img src="./sign/readmeImg/checkAddress.png" width="326px" height="680px" alt="index" />
   <img src="./sign/readmeImg/interviewList.png" width="326px" height="680px" alt="index" />
   <img src="./sign/readmeImg/interviewState.png" width="326px" height="680px" alt="index" />
-  <img src="./sign/readmeImg/personnalCenter.png" width="326px" height="680px" alt="index" />
 </p>
 
 

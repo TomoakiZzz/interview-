@@ -100,6 +100,10 @@ li {
   color: rgb(70, 68, 68);
   background: #f4f4f4;
 }
+.tag2 {
+  color: blue;
+  background: skyblue;
+}
 .tag3 {
   color: rgb(241, 43, 76);
   background: #fef0f0;
