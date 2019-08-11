@@ -27,10 +27,6 @@ const actions = {
     },
     async addAddresslist({ commit }, { ...payload }) {
         // console.log(payload,"////////////////")
-<<<<<<< HEAD
-=======
-        //    let data = await addAddress(payload)
->>>>>>> 6c1a8c48c645e1a824ea7abb4d65a86e41e526ba
         return new Promise(async (resolve, reject) => {
             payload.latitude = payload.address.location.lat;
             payload.longitude = payload.address.location.lng;

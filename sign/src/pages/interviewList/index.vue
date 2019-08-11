@@ -11,14 +11,10 @@
       <div class="container">
         <div>
           <tabList :list="list"></tabList>
-<<<<<<< HEAD
-          <div v-if="list.length && !hasMore" class="hintMsg">没有更多数据了...</div>
-=======
           <div v-if="list.length && list.length>=10" class="hintMsg">
             <span v-if="hasMore">下拉加载更多数据...</span>
             <span v-if="!hasMore">没有更多数据了</span>
           </div>
->>>>>>> 6c1a8c48c645e1a824ea7abb4d65a86e41e526ba
         </div>
       </div>
     </div>
@@ -148,11 +144,7 @@ export default {
   height: 80rpx;
   text-align: center;
   line-height: 80rpx;
-<<<<<<< HEAD
-  background: #eee;
-=======
   border-top: 1px solid #ccc;
->>>>>>> 6c1a8c48c645e1a824ea7abb4d65a86e41e526ba
 }
 </style>
 
