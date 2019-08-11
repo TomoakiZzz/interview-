@@ -11,6 +11,7 @@
       <div class="container">
         <div>
           <tabList :list="list"></tabList>
+          <div v-if="list.length && !hasMore" class="hintMsg">没有更多数据了...</div>
         </div>
       </div>
     </div>
@@ -58,18 +59,16 @@ export default {
     })
   },
   onReachBottom() {
-    wx.showLoading({
-      title: "玩命加载中", //上拉的时候会出现一个提示框
-      success: async () => {
-        if (this.hasMore) {
+    if (this.hasMore) {
+      wx.showLoading({
+        title: "玩命加载中", //上拉的时候会出现一个提示框
+        success: async () => {
           await this.updateLocation({ page: this.page + 1 });
           await this.interviewLists();
-          wx.hideLoading()
-        }else{
-          wx.hideLoading()
+          wx.hideLoading();
         }
-      }
-    });
+      });
+    }
   },
   // onPullDownRefresh() {},
   methods: {
@@ -82,7 +81,7 @@ export default {
     changTab(index, status) {
       this.tab = index;
       this.updateLocation({ status, page: 1 });
-      this.interviewLists()
+      this.interviewLists();
     }
   },
   onLoad() {
@@ -136,6 +135,13 @@ export default {
       }
     }
   }
+}
+.hintMsg {
+  width: 100%;
+  height: 80rpx;
+  text-align: center;
+  line-height: 80rpx;
+  background: #eee;
 }
 </style>
 

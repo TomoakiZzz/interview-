@@ -1,7 +1,6 @@
 <template>
   <div class="wrap">
     <ul v-if="list.length">
-      {{list.length}}
       <li v-for="item in list" :key="item.id" @click="details(item.id)">
         <p class="tabTop">
           <b class="firmName">{{item.company}}</b>
