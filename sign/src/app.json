@@ -9,7 +9,8 @@
     "pages/changeAddress/main",
     "pages/counter/main",
     "pages/interviewList/main",
-    "pages/detailInfo/main"
+    "pages/detailInfo/main",
+    "pages/punchCard/main"
   ],
   "permission": {
     "scope.userLocation": {

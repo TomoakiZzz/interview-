@@ -27,7 +27,6 @@ export let decrypt = params=>{
 
 //更新面试信息
 export let updateDetail = params=>{
-  console.log(params,"15484655484848")
   return fly.put(`/sign/${params.id}`,params.context)
 }
 //更新手机号
