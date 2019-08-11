@@ -110,5 +110,6 @@ li {
 }
 .none {
   margin-top: 30rpx;
+  text-align: center;
 }
 </style>

@@ -5,7 +5,7 @@ const state = {
   lists: {},
   addressId: 0,
   list: [],
-  status: 0,//表示面试类型
+  status: -1,//表示面试类型
   page: 1,//当前页码
   pageSize: 10,//当前显示的数据
   hasMore: true//是否有更多数据
@@ -23,8 +23,12 @@ const mutations = {
   },
   updateLocation(state, payload) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     console.log(payload.list,"上拉加载")
+>>>>>>> mengyali
+=======
+    // console.log(payload.list,"上拉加载")
 >>>>>>> mengyali
     if (payload.list) {
       if (payload.list.length === state.pageSize * state.page) {
@@ -48,11 +52,11 @@ const actions = {
     commit("updateDeatail", res.data);
   },
   async changeDetail({ commit, dispatch }, payload) {
-    console.log(payload, "888888888888")
+    // console.log(payload, "888888888888")
     let data = await updateDetail(payload)
     // console.log(data)
     if (data.code === 0) {
-      console.log('失败')
+      // console.log('失败')
       await dispatch('getDeatail', payload.id)
       await dispatch('getLocation', { status: -1, remind: payload.context.remind, page: state.page, pageSize: 10 })
 
@@ -63,11 +67,10 @@ const actions = {
     params.page = state.page
     params.pageSize = state.pageSize
     params.status = state.status
-    if (params.atatus === 2) {
+    if (params.status === 2) {
       delete params.status
     }
-
-
+    console.log(params,"传过来的参数")
     const res = await sign(params);
     console.log("每部分数据", res.data);
     res.data.map(item => {
